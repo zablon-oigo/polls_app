@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{question.question_text}}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-sm mx-auto p-6 rounded-lg shadow border border-gray-200 m-6">
+
+        <h1 class="text-2xl font-semibold text-start m-4">{{question.question_text }}</h1>
+        <ul class="space-y-4 m-4">
+            {% for choice in question.choice_set.all %}
+            <li class="font-medium text-lg text-indigo-500">{{choice.choice_text}} <span class="">{{choice.votes}}</span> vote{{choice.votes| pluralize}}</li>
+            <div class="w-3/4 bg-gray-200 rounded-full dark:bg-gray-700">
+                <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full w-{{choice.votes}}" >{{choice.votes}}</div>
+              </div>
+            {% endfor %}
+        </ul>
+        <div class="flex flex-col justify-center items-start w-full">
+        <a href="{% url 'vote:home' %}" class="m-4 w-1/2 py-4 px-6 bg-teal-600 hover:bg-teal-800 rounded-lg text-white text-center font-semibold">finish</a>
+         {% comment %}
+        <a href="{% url 'vote:detail' question.id %}" class="m-4 py-4 px-6 bg-teal-600 hover:bg-teal-800 rounded-lg">vote again +</a>
+        {% endcomment %}
+
+    </div>
+   
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock %} | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen">
+    <header class="bg-gray-800 p-6 sticky z-10 text-white top-0">
+        <nav class="flex justify-between items-center max-w-4xl mx-auto">
+            <div class="logo">
+                <a href="/" class="text-3xl">Polls</a>
+            </div>
+            <div class="space-x-6">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'vote:home' %}" class="text-xl font-semibold hover:text-gray-500">Hi {{user.username}}</a>
+                <a href="{% url 'accounts:logout' %}" class="text-xl font-semibold hover:text-gray-500">Logout</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="text-xl font-semibold hover:text-gray-500">Login</a>
+                <a href="{% url 'accounts:register' %}" class="border-2 border-white px-6 py-3 rounded-lg text-xl font-semibold hover:text-gray-500">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main class="">
+        <div class="max-w-sm mx-auto p-2">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="flex flex-col max-w-lg  mx-auto">
+                <div class="flex inline-flex justify-between bg-teal-100 border border-teal-400 text-teal-700 px-4 py-3 my-2 rounded "
+                    role="alert">
+                    <span class="block sm:inline pl-2">
+                        <strong class="font-bold"> {{message}}</strong>
+                    </span>
+                    <span class="inline" onclick="return this.parentNode.remove();">
+                        <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <title>Close</title>
+                            <path
+                                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                        </svg>
+                    </span>
+                </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    
+         
+
+           {% block content %}
+           {% endblock %}
+        
+        
+    </main>
+
+    <footer class="bg-gray-800 text-white p-6 border-t-2 border-gray-200">
+        <div class="max-w-4xl mx-auto flex justify-between flex-col sm:flex-row">
+            <div class="sm:w-1/2 w-full m-2 ">
+                <h2 class="text-2xl font-medium">PollsApp</h2>
+                <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, delectus!</p>
+            </div>
+            <div class="sm:w-1/2 w-full m-2 flex items-center justify-center">
+                <p class="text-lg text-center">&copy; Copyright {% now "Y" %} </p>
+            </div>
+        </div>
+    </footer>
+  
+</body>
+</html>

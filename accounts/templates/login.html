@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock %}
+{% block content %}
+<div class="m-8 rounded-xl max-w-sm mx-auto bg-gray-100 p-6 shadow-2xl">
+    <div class="w-full flex flex-col items-center">
+        <h2 class="text-3xl font-semibold mb-2">Login</h2>
+        <form action="{% url 'accounts:login' %}" method="post">
+            {% csrf_token %}
+             {% for field in form %}
+             <label for="" class="font-semibold text-xl">{{field.label}}</label>
+             {{field}}
+             {% endfor%}
+            <input type="submit" value="Login" class="bg-gray-800 py-4 px-6 w-full mx-auto hover:bg-gray-600 rounded-xl font-semibold text-white">
+            <p class="m-3 text-base">Don't have an account ?<span class="text-blue-500 underline"><a href="{% url 'accounts:register' %}">Register</a></span></p>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

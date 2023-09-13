@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{question.question_text}}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto p-6 shadow-2xl rounded-lg m-6">
+   <div class="border border-gray-200 rounded-lg p-6">
+      <form action="{% url 'vote:vote' question.id %}" method="post">
+         {% csrf_token %}
+         
+             <h2 class="text-3xl font-semibold text-center">{{question.question_text}}</h2>
+             {% if error_message%}
+             <div class="flex flex-col max-w-lg  mx-auto">
+               <div class="flex inline-flex justify-between bg-red-100 border border-red-400 text-gray-700 px-4 py-3 my-2 rounded "
+                   role="alert">
+                   <span class="block sm:inline pl-2">
+                       <strong class="font-bold"> {{error_message}}</strong>
+                   </span>
+                   <span class="inline" onclick="return this.parentNode.remove();">
+                       <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                           <title>Close</title>
+                           <path
+                               d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                       </svg>
+                   </span>
+               </div>
+               </div>
+            {% endif %}
+           {% for choice in question.choice_set.all %}
+              <label for="{{choice.choice_text}}" class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 my-3  hover:bg-indigo-300 cursor-pointer">
+               <input type="radio" name="choice" value="{{choice.id}}">
+               {{choice.choice_text}}
+            </label>
+              {% endfor %}
+         
+              <div class="flex items-center justify-center">
+               <input type="submit" value="vote" class="  w-1/2 px-6 py-4 rounded-xl bg-blue-500 hover:bg-blue-700 border border-gray-600 text-sm text-white font-semibold">
+              </div>
+         
+        </form>
+   </div>
+  
+</div>
+ 
+{% endblock %}
