@@ -1,4 +1,5 @@
 # polls_app
+a simple poll app where users can create polls, vote in polls, and view poll results.
 ## Demo
 https://polls-app-pwta.onrender.com/
 ## Screenshots
