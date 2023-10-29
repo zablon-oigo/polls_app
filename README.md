@@ -2,6 +2,14 @@
 a simple poll app where users can create polls, vote in polls, and view poll results.
 ## Demo
 https://polls-app-pwta.onrender.com/
+
+## Tech Stack
+
+**Client:** Javascript, Html, TailwindCSS
+
+**Server:** Python, Django
+
+
 ## Screenshots
 ![Screenshot 2023-10-10 at 07-43-41 Vote Home](https://github.com/zablon-oigo/polls_app/assets/143833326/eb501bba-b361-41dc-861b-cba8b89e85fb)
 ![Screenshot 2023-10-10 at 07-44-25 Register Home](https://github.com/zablon-oigo/polls_app/assets/143833326/79dc2201-ff15-4680-861b-0113882032c2)
